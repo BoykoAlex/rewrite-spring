@@ -32,8 +32,8 @@ class UpdateEnableReactiveMethodSecurityTest implements RewriteTest {
         spec.recipe(new UpdateEnableReactiveMethodSecurity())
           .parser(JavaParser.fromJavaVersion()
             .logCompilationWarningsAndErrors(true)
-            .classpathFromResources(new InMemoryExecutionContext(), "spring-security-web-5.8.+",
-              "spring-security-config-5.8.+"));
+            .classpathFromResources(new InMemoryExecutionContext(), "spring-security-web-5.8",
+              "spring-security-config-5.8", "spring-context-5.3"));
     }
 
     @DocumentExample
@@ -85,13 +85,14 @@ class UpdateEnableReactiveMethodSecurityTest implements RewriteTest {
               class SecurityConfig {
               }
               """,
-              """
+            """
               import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 
               @EnableReactiveMethodSecurity(order = 1)
               class SecurityConfig {
               }
-              """)
+              """
+          )
         );
     }
 }
